@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/rendering.dart';
 
 class ItemOne extends StatefulWidget {
   @override
@@ -24,6 +25,17 @@ class _ItemOneState extends State<ItemOne> {
     });
   }
 
+  List<MaterialColor> colorItem = [
+    Colors.deepOrange,
+    Colors.amber,
+    Colors.pink,
+    Colors.purple,
+    Colors.yellow,
+    Colors.lightBlue,
+    Colors.pink
+  ];
+  MaterialColor color;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +53,7 @@ class _ItemOneState extends State<ItemOne> {
                     itemBuilder: (context, index){
 
                       var ourData = snapshot.data[index];
+                      color = colorItem[index % colorItem.length];
 
                       return Container(
                         height: 170,
@@ -87,6 +100,25 @@ class _ItemOneState extends State<ItemOne> {
                                         style: TextStyle(
                                           fontSize: 17,
                                           color: Colors.black
+                                        ),
+                                      ),
+                                    ),
+                                    
+                                    Align(
+                                      alignment: Alignment.bottomRight,
+                                      child: Container(
+                                        height: 40,
+                                        margin: EdgeInsets.all(9),
+                                        padding: EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                          color: color,
+                                          borderRadius: BorderRadius.circular(20)
+                                        ),
+                                        child: Text("view details",
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.white
+                                          ),
                                         ),
                                       ),
                                     )
