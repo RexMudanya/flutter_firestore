@@ -56,7 +56,7 @@ class _ItemOneState extends State<ItemOne> {
                       color = colorItem[index % colorItem.length];
 
                       return Container(
-                        height: 170,
+                        height: 200,
                         margin: EdgeInsets.all(5),
                         child: Card(
                           elevation: 10,
@@ -68,7 +68,7 @@ class _ItemOneState extends State<ItemOne> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
                                     child: Image.network(ourData.data['image'],
-                                    height: 170,
+                                    height: 200,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -106,20 +106,30 @@ class _ItemOneState extends State<ItemOne> {
                                     
                                     Align(
                                       alignment: Alignment.bottomRight,
-                                      child: Container(
-                                        height: 40,
-                                        margin: EdgeInsets.all(9),
-                                        padding: EdgeInsets.all(10),
-                                        decoration: BoxDecoration(
-                                          color: color,
-                                          borderRadius: BorderRadius.circular(20)
-                                        ),
-                                        child: Text("view details",
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            color: Colors.white
+                                      child: InkWell(
+                                        onTap: (){
+                                          customDialog(
+                                              context,
+                                              ourData.data['image'],
+                                              ourData.data['title'],
+                                            ourData.data['description']
+                                          );
+                                        },
+                                        child: Container(
+                                          height: 40,
+                                          margin: EdgeInsets.all(9),
+                                          padding: EdgeInsets.all(10),
+                                          decoration: BoxDecoration(
+                                              color: color,
+                                              borderRadius: BorderRadius.circular(20)
                                           ),
-                                        ),
+                                          child: Text("view details",
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                color: Colors.white
+                                            ),
+                                          ),
+                                      ),
                                       ),
                                     )
 
@@ -139,6 +149,71 @@ class _ItemOneState extends State<ItemOne> {
 
         },
       ),
+    );
+  }
+
+  customDialog(BuildContext context, String img, String title, String des){
+    return showDialog(
+        context: context,
+      builder: (BuildContext context){
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20)
+            ),
+            child: Container(
+              height: MediaQuery.of(context).size.height/1,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    colors: [
+                      Colors.deepOrange,
+                      Colors.lightBlue
+                    ]
+                )
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      height: 150,
+                      child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.network(img,
+                      fit: BoxFit.cover,
+                      height: 150,
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                      ),
+                    ),
+
+                    SizedBox(height: 6,),
+
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: Text(title.toUpperCase(),
+                      style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+
+                    SizedBox(height: 6,),
+
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: Text(des,
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+
+                  ],
+                ),
+              ),
+            ),
+          );
+      }
     );
   }
 }
