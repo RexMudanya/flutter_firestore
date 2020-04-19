@@ -31,6 +31,10 @@ class _HomeState extends State<Home>{
         backgroundColor: Colors.deepOrange,
       ),
 
+      drawer: Drawer(
+
+      ),
+
       body: pageOptions[_indexpage],
 
       bottomNavigationBar: CurvedNavigationBar(
