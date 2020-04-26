@@ -32,7 +32,55 @@ class _HomeState extends State<Home>{
       ),
 
       drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
 
+            UserAccountsDrawerHeader(
+              accountEmail: null,
+              accountName: Text("Complex App", style: TextStyle(
+                fontSize: 20
+              ),),
+              decoration: BoxDecoration(
+                color: Colors.deepOrange
+              ),
+            ),
+
+            ListTile(
+              onTap: (){
+                Navigator.of(context).pop();
+                Navigator.of(context).push(new MaterialPageRoute(builder: (c)=>ItemOne()));
+              },
+              title: Text("First Item", style: TextStyle(
+                fontSize: 17,
+                color: Colors.black
+              ),),
+              leading: Icon(Icons.more, color: Colors.black,),
+            ),
+            ListTile(
+              onTap: (){
+                Navigator.of(context).pop();
+                Navigator.of(context).push(new MaterialPageRoute(builder: (c)=>ItemTwo()));
+              },
+              title: Text("Home Item", style: TextStyle(
+                fontSize: 17.0,
+                  color: Colors.black
+              ),),
+              leading: Icon(Icons.home, color: Colors.black),
+            ),
+            ListTile(
+              onTap: (){
+                Navigator.of(context).pop();
+                Navigator.of(context).push(new MaterialPageRoute(builder: (c)=>ItemThree()));
+              },
+              title: Text("Third Item", style: TextStyle(
+                fontSize: 17.0,
+                  color: Colors.black
+              ),),
+              leading: Icon(Icons.photo, color: Colors.black),
+            )
+
+          ],
+        ),
       ),
 
       body: pageOptions[_indexpage],
