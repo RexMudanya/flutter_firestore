@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/rendering.dart';
 
 class ItemThree extends StatefulWidget {
+  static var ourData;
+
   @override
   _ItemThreeState createState() => _ItemThreeState();
 }
@@ -59,4 +61,31 @@ class _ItemThreeState extends State<ItemThree> {
 
     ); //scaffold
   }
+
+  customDialog(BuildContext context, String img){
+    return showDialog(
+        context: context,
+        builder: (BuildContext context){
+          return Dialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20)
+            ),
+            child: Container(
+              height: MediaQuery.of(context).size.height/1.2,
+              width: MediaQuery.of(context).size.width/1.2,
+              child: InkWell(
+                onTap: (){
+                  customDialog(context, ItemThree.ourData.data['image']);
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.network(img, fit: BoxFit.cover,),
+                ),
+              ),
+            ),
+          );
+        }
+    );
+  }
+
 }
